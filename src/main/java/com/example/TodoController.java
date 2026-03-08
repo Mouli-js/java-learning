@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +17,31 @@ public class TodoController {
     private TodoService todoService;
 
     @GetMapping
-    public List<Todo> getAllTodos() {
-        return todoService.getAllTodos();
+    public List<Todo> getAllTodos(
+            @RequestParam(required = false) Boolean completed,
+            @RequestParam(required = false) String sortBy) {
+
+        List<Todo> todos = todoService.getAllTodos();
+
+        // Filter by completed status if requested
+        if (completed != null) {
+            todos = todos.stream()
+                    .filter(todo -> todo.isCompleted() == completed)
+                    .toList();
+        }
+
+        // Sort if requested
+        if ("title".equals(sortBy)) {
+            todos = todos.stream()
+                    .sorted((a, b) -> a.getTitle().compareTo(b.getTitle()))
+                    .toList();
+        } else if ("id".equals(sortBy)) {
+            todos = todos.stream()
+                    .sorted((a, b) -> a.getId().compareTo(b.getId()))
+                    .toList();
+        }
+
+        return todos;
     }
 
     @GetMapping("/{id}")
@@ -31,7 +55,7 @@ public class TodoController {
     }
 
     @PostMapping
-    public ResponseEntity<Todo> createTodo(@RequestBody TodoRequest request) {
+    public ResponseEntity<Todo> createTodo(@Valid @RequestBody TodoRequest request) {
         Todo todo = todoService.createTodo(request.getTitle(), request.getDescription());
         return ResponseEntity.status(HttpStatus.CREATED).body(todo);
     }
