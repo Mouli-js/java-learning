@@ -1,0 +1,26 @@
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Build
+target/
+*.class
+*.jar
+*.war
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Dependencies
+.m2/
+node_modules/
+
+# Logs
+*.log
