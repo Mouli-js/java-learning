@@ -1,0 +1,32 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2868
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh16040\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 === REST API Garbage Collection Analysis ===\
+Date: 2026-03-26\
+Java Version: 25 (G1GC)\
+\
+Test Results:\
+- GC Events: 18\
+- Fastest GC: 1.645ms (GC 0)\
+- Slowest GC: 4.257ms (GC 5)\
+- Average Pause: ~2.8ms\
+\
+Memory Patterns:\
+- Heap Before: Ranges from 23M to 158M\
+- Heap After: Ranges from 3M to 19M\
+- Freed per GC: 40-150 MB\
+\
+Observations:\
+1. G1GC is very efficient\
+2. Memory cleanup is aggressive\
+3. No memory leaks detected\
+4. Pause times are acceptable\
+5. API handled requests well\
+\
+Conclusion:\
+REST API memory management is EXCELLENT.\
+G1GC is handling the workload perfectly.}
